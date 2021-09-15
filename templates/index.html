@@ -22,6 +22,24 @@
             /* p {
                 font-size: 24pt;
             } */
+            a {
+                background-color: rgb(244, 67, 54);
+                box-sizing: border-box;
+                color: rgb(255, 255, 255);
+                display: inline-block;
+                font-family: Verdana, sans-serif;
+                font-size: 16px;
+                line-height: 24px;
+                margin-left: 20px;
+                opacity: 0.9;
+                padding: 8px 25px;
+                text-align: center;
+                text-decoration: rgb(255, 255, 255);
+                text-decoration-color: rgb(255, 255, 255);
+                text-decoration-line: none;
+                text-decoration-style: solid;
+                text-decoration-thickness: auto
+            }
         </style>
     </head>
 
@@ -29,13 +47,16 @@
         <div>
             <h1>Pet Arabia Reports</h1><br>
             <h2>Upload Exported Data From Odoo</h2>
-            <p>For monthly reports, ensure that you only upload data for a single month.</p>
+
+            <p>Then fill it up with your monthly targets. Contact the systems manager if something's wrong.</p>
+
+            <p>Note: For monthly reports, ensure that you only upload data for a single month.</p>
             <form method=post enctype=multipart/form-data>
                 <p>
-                    <input type=file name=file>
-                    <input type=submit value=Upload>
+                    <input type=file name=data>
+                    <input type=submit value="Upload & Get Reports">
                 </p>
-    </form>
+            </form>
         </div>
     </body>
 
