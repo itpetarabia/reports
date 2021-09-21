@@ -241,8 +241,7 @@ def generate_report(input_csv, dest_dir, yearmonth, prefix_filename = 'DSR_'):
 
 
         wb_copy = copy.copy(wb)
-        ws = wb_copy['JUL']
-        # ws.title = 'REPORT'
+        ws = wb_copy['REPORT']
         insert_xltable(ws, month_orders, excel_sheet_map)
         save_path = os.path.join(dest_dir, f"{prefix_filename}{branch}.xlsx")
         wb_copy.save(save_path)
