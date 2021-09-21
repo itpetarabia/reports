@@ -1,4 +1,5 @@
 import os
+from report import generate_report
 from flask import Flask, request, redirect, url_for, render_template, send_from_directory, send_file
 from werkzeug.utils import secure_filename
 
@@ -15,7 +16,7 @@ ALLOWED_EXTENSIONS = {'csv', 'xlsx'}
 
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 # limit upload size upto 8mb
-app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
+app.config['MAX_CONTENT_LENGTH'] = 30 * 1024 * 1024
 
 
 def allowed_file(filename):
@@ -35,17 +36,14 @@ def index():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            process_file(os.path.join(app.config['UPLOAD_FOLDER'], filename), filename)
-            return redirect(url_for('uploaded_file', filename='sample-output.txt'))
+            process_file(os.path.join(app.config['UPLOAD_FOLDER'], filename), 'dsr.xlsx')
+            return redirect(url_for('uploaded_file', filename='dsr.xlsx'))
     return render_template('index.html')
 
 
-def process_file(path, filename):
-    pass
-    # get_report()
-
-# def get_report():
-#     pass
+def process_file(inputcsv, filename):
+    output_path = os.path.join(app.config['OUTPUT_FOLDER'], filename)
+    generate_report(inputcsv, output_path)
 
 
 @app.route('/uploads/<filename>')
