@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+import os
+import copy
+
 import pandas as pd
 import numpy as np
 from openpyxl import load_workbook # Write Excel Files
@@ -117,7 +120,7 @@ def select_df_bymonth(df, yearmonth):
                         .fillna(0.)
     return output_df
 
-def generate_report(input_csv, dest_path):
+def generate_report(input_csv, dest_dir, yearmonth, prefix_filename = 'DSR_'):
 
     # Read the CSV
     df = pd.read_csv(input_csv)
@@ -227,22 +230,25 @@ def generate_report(input_csv, dest_path):
                 whole_table[c] = 0.0
 
 
-    # Select branch
-    manama_orders = whole_table[whole_table['Branch'] == 'Manama']
-
-    # Select Month & Fill in missing Days with Zeros
-    manama_july_orders = select_df_bymonth(manama_orders, '2021-07') # Get July
-
     # Load Excel Template
     wb = load_workbook(filename = 'Branch_Daily_Sales_Report_Sample.xlsx')
-    ws = wb['JUL']
 
-    insert_xltable(ws, manama_july_orders, excel_sheet_map)
-    wb.save(dest_path)
-    return dest_path
+    for branch in whole_table.Branch.unique():
+        branch_orders = whole_table[whole_table['Branch'] == branch]
+
+        # Select Month & Fill in missing Days with Zeros
+        month_orders = select_df_bymonth(branch_orders, yearmonth) 
+
+
+        wb_copy = copy.copy(wb)
+        ws = wb_copy['JUL']
+        # ws.title = 'REPORT'
+        insert_xltable(ws, month_orders, excel_sheet_map)
+        save_path = os.path.join(dest_dir, f"{prefix_filename}{branch}.xlsx")
+        wb_copy.save(save_path)
 
 
 if __name__ == '__main__':
 
-    generate_report('pos.order2020-1.csv', 'output/dsr.xlsx')
+    generate_report('pos.order2020-1.csv', 'output')
     print("\nDone!")

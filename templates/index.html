@@ -46,11 +46,32 @@
     <body>
         <div>
             <h1>Pet Arabia Reports</h1><br>
-            <h2>Upload Exported Data From Odoo</h2>
 
 
-            <p>Note: For monthly reports, ensure that you only upload data for a single month.</p>
+
+            <!-- Month Drop Down Box -->
+            <!-- <form class="form-inline" method="POST" enctype=multipart/form-data>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default">Go</button>
+            </div>
+            </form> -->
+
             <form method=post enctype=multipart/form-data>
+                <div class="input-group">
+                    <h3 class="input-group-addon">Select Month & Year</h3>
+                    <select name="month_select" class="selectpicker form-control">
+                    {% for o in data['months'] %}
+                    <option value="{{ o }}">{{ o }}</option>
+                    {% endfor %}
+                    </select>
+                    <select name="year_select" class="selectpicker form-control">
+                    {% for o in data['years'] %}
+                    <option value="{{ o }}">{{ o }}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+                <br/>
+                <h3>Upload Data From Odoo</h3>
                 <p>
                     <input type=file name=data>
                     <input type=submit value="Upload & Get Reports">
