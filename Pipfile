@@ -12,7 +12,7 @@ Jinja2 = "==2.11.2"
 MarkupSafe = "==1.1.1"
 Werkzeug = "==1.0.1"
 pandas = "*"
-openpyxl = "*"
+openpyxl = "==3.0.7"
 
 [dev-packages]
 
