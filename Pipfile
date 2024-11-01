@@ -4,18 +4,23 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-click = "==7.1.2"
-gunicorn = "==20.0.4"
-itsdangerous = "==1.1.0"
-Flask = "==1.1.2"
-Jinja2 = "==2.11.2"
-MarkupSafe = "==1.1.1"
-Werkzeug = "==1.0.1"
+click = "*"
+et-xmlfile = "*"
+flask = "*"
+gunicorn = "*"
+itsdangerous = "*"
+jinja2 = "*"
+markupsafe = "*"
+numpy = "*"
+openpyxl = "*"
 pandas = "*"
-openpyxl = "==3.0.7"
-setuptools = "*"
+python-dateutil = "*"
+pytz = "*"
+six = "*"
+werkzeug = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.8"
+python_version = "3.12"
+python_full_version = "3.12.7"
